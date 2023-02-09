@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install modules
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run eslint --max-warnings=0
+
+      - name: Run Stylelint
+        run: npm run stylelint --max-warnings=0
+
+      - name: Build
+        run: npm run build
