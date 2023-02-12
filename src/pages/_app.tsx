@@ -12,7 +12,7 @@ import 'styles/main.scss';
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
       navigator.serviceWorker.register(
         process.env.serviceWorkerUrl as string,
         { scope: '/' }
