@@ -1,20 +1,20 @@
-import React from "react";
-import Image from "components/image";
-import styles from "./Landing.module.scss";
+import React from 'react';
+import Image from 'components/image';
+import styles from './Landing.module.scss';
 
 const {
   wrapper,
   landing,
   landingText,
   landingImage,
-  landingNavigationWrapper,
+  landingNavigationWrapper
 } = styles;
 
 export default function Landing(): JSX.Element {
   return (
-    <div className={wrapper}>
-      <div className={landing}>
-        <div className={landingText}>
+    <div className={ wrapper }>
+      <div className={ landing }>
+        <div className={ landingText }>
           <h1>Easter Journey</h1>
           <p>
             Designed to help you kick-start your next project.
@@ -24,7 +24,7 @@ export default function Landing(): JSX.Element {
             features.
           </p>
         </div>
-        <div className={landingNavigationWrapper}>
+        <div className={ landingNavigationWrapper }>
           <a
             href="https://github.com/bethbapchurch/easter-journey"
             target="_blank"
@@ -35,7 +35,7 @@ export default function Landing(): JSX.Element {
           <p>Available under MIT license</p>
         </div>
         <Image
-          className={landingImage}
+          className={ landingImage }
           src="/assets/landing.png"
           alt="Desktop & Mobile PWA Application"
           width="450px"
