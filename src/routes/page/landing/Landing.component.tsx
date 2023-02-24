@@ -35,11 +35,11 @@ export default function Landing(): JSX.Element {
           <p>Available under MIT license</p>
         </div>
         <Image
-          className={ landingImage }
-          src="/assets/landing.png"
-          alt="Desktop & Mobile PWA Application"
-          width="450px"
-          height="310px"
+          className={landingImage}
+          src="/assets/EJ_bLogo_512x360.png"
+          alt="Easter Journey Application"
+          width="512px"
+          height="360px"
         />
       </div>
     </div>
