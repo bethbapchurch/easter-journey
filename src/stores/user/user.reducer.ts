@@ -9,30 +9,26 @@ const initialState: UserState = {
   followers: null
 };
 
-export default (
+const userReducer = (
   state: UserState = initialState,
   action: UserActions
 ): UserState => {
   switch (action.type) {
-  case UPDATE_USER: {
-    const {
-      user: {
+    case UPDATE_USER: {
+      const {
+        user: { name, avatar_url, bio, followers }
+      } = action;
+
+      return {
         name,
         avatar_url,
         bio,
         followers
-      }
-    } = action;
+      };
+    }
 
-    return {
-      name,
-      avatar_url,
-      bio,
-      followers
-    };
-  }
-
-  default:
-    return state;
+    default:
+      return state;
   }
 };
+export default userReducer;

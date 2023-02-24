@@ -7,36 +7,35 @@ import {
 } from './notifications.actions';
 
 type NotificationsState = {
-    [key in NotificationId]: Notification
+  [key in NotificationId]: Notification;
 };
 
 const initialState: NotificationsState = {};
 
-export default (
+const notificationReducer = (
   state: NotificationsState = initialState,
   action: NotificationsActions
 ): NotificationsState => {
   switch (action.type) {
-  case SHOW_NOTIFICATION: {
-    const { notification } = action;
- 
-    return {
-      ...state,
-      [Date.now()]: notification
-    };
-  }
+    case SHOW_NOTIFICATION: {
+      const { notification } = action;
 
-  case HIDE_NOTIFICATION: {
-    const { notificationId } = action;
-    const {
-      [notificationId]: notification,
-      ...notifications
-    } = state;
+      return {
+        ...state,
+        [Date.now()]: notification
+      };
+    }
 
-    return notifications;
-  }
+    case HIDE_NOTIFICATION: {
+      const { notificationId } = action;
+      const { [notificationId]: notification, ...notifications } = state;
 
-  default:
-    return state;
+      return notifications;
+    }
+
+    default:
+      return state;
   }
 };
+
+export default notificationReducer;

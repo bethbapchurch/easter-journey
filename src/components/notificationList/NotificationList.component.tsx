@@ -11,24 +11,19 @@ export const NOTIFICATION_TTL = 5000;
 
 export default function NotificationList(): JSX.Element {
   const notifications = useSelector((state: RootState) => state.notifications);
-  const cssVariables = { '--animation-duration': `${ANIMATION_DURATION}ms` } as CSSProperties;
+  const cssVariables = {
+    '--animation-duration': `${ANIMATION_DURATION}ms`
+  } as CSSProperties;
 
   return (
-    <ul
-      className={ notificationList }
-      style={ cssVariables }
-    >
-      {
-        Object.entries(notifications).map(
-          ([notificationId, notification]) => (
-            <Notification
-              key={ notificationId }
-              notificationId={ +notificationId }
-              notification={ notification }
-            />
-          )
-        )
-      }
+    <ul className={notificationList} style={cssVariables}>
+      {Object.entries(notifications).map(([notificationId, notification]) => (
+        <Notification
+          key={notificationId}
+          notificationId={+notificationId}
+          notification={notification}
+        />
+      ))}
     </ul>
   );
 }

@@ -9,19 +9,19 @@ import Image from 'components/image';
 import { Style } from 'components/html/modifiers';
 
 type HtmlProps = {
-    content: string
-}
+  content: string;
+};
 
 export const components: { [key: string]: any } = {
-  'img': Image,
-  'style': Style
+  img: Image,
+  style: Style
 };
 
 export const options: HTMLReactParserOptions = {
   /*
-     * Node set as `any` due to babel es5 transpilation which breaks `instanceof`.
-     * Instead of checking `instanceof` we check `attribs`.
-     */
+   * Node set as `any` due to babel es5 transpilation which breaks `instanceof`.
+   * Instead of checking `instanceof` we check `attribs`.
+   */
   replace: (node: any) => {
     if (node.attribs) {
       const { name = '', attribs, children } = node as Element;
@@ -41,9 +41,5 @@ export const options: HTMLReactParserOptions = {
 export default function Html(props: HtmlProps): JSX.Element {
   const { content } = props;
 
-  return (
-    <>
-      { parser(content, options) }
-    </>
-  );
+  return <>{parser(content, options)}</>;
 }

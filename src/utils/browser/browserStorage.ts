@@ -6,9 +6,9 @@ type BrowserStorageEntryTTL = number;
 type BrowserStorageEntryCreatedAt = number;
 
 interface BrowserStorageEntry {
-    value: BrowserStorageEntryValue,
-    ttl: BrowserStorageEntryTTL,
-    createdAt: BrowserStorageEntryCreatedAt 
+  value: BrowserStorageEntryValue;
+  ttl: BrowserStorageEntryTTL;
+  createdAt: BrowserStorageEntryCreatedAt;
 }
 
 export class BrowserStorage {
@@ -44,12 +44,16 @@ export class BrowserStorage {
 
     const createdAt = Date.now() as BrowserStorageEntryCreatedAt;
 
-    this._storage.setItem(name, JSON.stringify({
-      value,
-      ttl,
-      createdAt
-    }));
+    this._storage.setItem(
+      name,
+      JSON.stringify({
+        value,
+        ttl,
+        createdAt
+      })
+    );
   }
 }
 
-export default new BrowserStorage();
+const browserStorage = new BrowserStorage();
+export default browserStorage;
