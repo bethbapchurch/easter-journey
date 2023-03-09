@@ -9,7 +9,7 @@ export default function Sidebar(): JSX.Element {
   return (
     <aside className={sidebar}>
       <div className={sidebarPages}>
-        <h3>Pages</h3>
+        <h3>Guide</h3>
         <Pages className={sidebarPagesList} activeClass={sidebarPagesActive}>
           <li>
             <Placeholder length="short" />

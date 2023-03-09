@@ -16,30 +16,23 @@ export default function Landing(): JSX.Element {
       <div className={landing}>
         <div className={landingText}>
           <h1>Easter Journey</h1>
-          <p>
-            Designed to help you kick-start your next project.
-            <br />
-            This boilerplate is production ready and comes with a service
-            worker, redux store, dark-mode, router, and plenty other useful
-            features.
-          </p>
+          <p>A reflective walk-through of the Easter story</p>
         </div>
         <div className={landingNavigationWrapper}>
           <a
-            href="https://github.com/bethbapchurch/easter-journey"
+            href="https://bethlehem.org.nz/easter-journey/"
             target="_blank"
             rel="noreferrer"
           >
-            View source code on GitHub
+            At Bethlehem Baptist Church
           </a>
-          <p>Available under MIT license</p>
         </div>
         <Image
           className={landingImage}
-          src="/assets/landing.png"
-          alt="Desktop & Mobile PWA Application"
-          width="450px"
-          height="310px"
+          src="/assets/EJ_bLogo_512x360.png"
+          alt="Easter Journey Application"
+          width="512px"
+          height="360px"
         />
       </div>
     </div>

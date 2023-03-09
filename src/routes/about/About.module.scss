@@ -1,8 +1,8 @@
 @use 'styles/variables/media';
 @use 'styles/variables/placeholder' as *;
 
-.profile {
-  --profile-picture-size: 200px;
+.about {
+  --about-picture-size: 200px;
 
   p {
     font-size: 20px;
@@ -13,7 +13,7 @@
     border-radius: var(--border-radius);
     display: grid;
     grid-gap: 2rem;
-    grid-template-columns: var(--profile-picture-size) 1fr;
+    grid-template-columns: var(--about-picture-size) 1fr;
     padding: 2rem;
 
     @include media.mobile {
@@ -22,10 +22,9 @@
   }
 
   &Picture {
-    border-radius: 50%;
-    height: var(--profile-picture-size);
+    height: var(--about-picture-size);
     margin: 0 auto;
-    width: var(--profile-picture-size);
+    width: var(--about-picture-size);
   }
 
   &Content {
@@ -43,7 +42,7 @@
   }
 }
 
-.about {
+.appAbout {
   padding: 1rem;
 
   h2 {
@@ -53,22 +52,5 @@
 
   p {
     max-width: 800px;
-  }
-}
-
-.followers {
-  &Placeholder {
-
-    color: transparent;
-    margin: 0 5px 0 0;
-    @include placeholder;
-
-    &::before { content: '42'; }
-  }
-
-  &Icon {
-    --icon-size: 20px;
-
-    margin: 0 10px;
   }
 }
