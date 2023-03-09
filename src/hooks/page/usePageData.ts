@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'stores';
 import { getPage, Page } from 'stores/pages';
-import { useDispatch, useSelector } from 'react-redux';
 import { usePageId } from 'hooks/page';
 
 const usePageData = (): Page => {
@@ -15,7 +15,7 @@ const usePageData = (): Page => {
     if (!pageData) {
       dispatch(getPage(pageId));
     }
-  }, [pageId]);
+  }, [dispatch, pageData, pageId]);
 
   return pageData || {};
 };

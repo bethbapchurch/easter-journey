@@ -2,35 +2,31 @@ import React, { useCallback, useState } from 'react';
 import { injectClassNames } from 'utils/css';
 import styles from './Image.module.scss';
 
-const {
-  image,
-  placeholder
-} = styles;
+const { image, placeholder } = styles;
 
 enum ImageState {
   Loading = 'IMAGE_LOADING',
   Loaded = 'IMAGE_LOADED',
   NotFound = 'IMAGE_NOT_FOUND',
-  NotSpecified = 'IMAGE_NOT_SPECIFIED',
+  NotSpecified = 'IMAGE_NOT_SPECIFIED'
 }
 
 type ImageProps = {
-    isPlaceholder?: boolean | null,
-    src?: string,
-    alt?: string,
-    height?: string,
-    width?: string,
-    loading?: 'lazy' | 'eager',
-    className?: string
+  isPlaceholder?: boolean | null;
+  src?: string;
+  alt?: string;
+  height?: string;
+  width?: string;
+  loading?: 'lazy' | 'eager';
+  className?: string;
 };
 
-type UseImageState = () => [
-  (img: HTMLImageElement | null) => void,
-  ImageState,
-];
+type UseImageState = () => [(img: HTMLImageElement | null) => void, ImageState];
 
 const useImageState: UseImageState = () => {
-  const [imageState, setImageState] = useState<ImageState>(() => ImageState.Loading);
+  const [imageState, setImageState] = useState<ImageState>(
+    () => ImageState.Loading
+  );
 
   const imageRefCallback = useCallback((img: HTMLImageElement | null) => {
     if (!img) {
@@ -79,31 +75,26 @@ export default function Image(props: ImageProps): JSX.Element {
   } = props;
   const [imageRef, imageState] = useImageState();
 
-  const imageStyle = isPlaceholder
-    ? placeholder : styles[imageState];
+  const imageStyle = isPlaceholder ? placeholder : styles[imageState];
 
   return (
     <div
       role="img"
-      aria-label={ alt }
-      className={
-        injectClassNames(
-          image,
-          imageStyle,
-          [className, !!className]
-        )
-      }
+      aria-label={alt}
+      className={injectClassNames(image, imageStyle, [className, !!className])}
     >
-      { !isPlaceholder && (
+      {!isPlaceholder && (
+        // TODO: replace with <Image /> when move to next v13
+        // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={ src }
-          alt={ alt }
-          ref={ imageRef }
-          height={ height }
-          width={ width }
-          loading={ loading }
+          src={src}
+          alt={alt}
+          ref={imageRef}
+          height={height}
+          width={width}
+          loading={loading}
         />
-      ) }
+      )}
     </div>
   );
 }

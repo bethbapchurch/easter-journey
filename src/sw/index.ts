@@ -9,7 +9,11 @@
  */
 
 import { setCacheNameDetails, cacheNames } from 'workbox-core';
-import { CacheFirst, NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import {
+  CacheFirst,
+  NetworkFirst,
+  StaleWhileRevalidate
+} from 'workbox-strategies';
 import { precacheAndRoute } from 'workbox-precaching';
 
 import deleteEntriesForCache from 'sw/utils/deleteEntriesForCache';
@@ -23,14 +27,14 @@ import Router from 'sw/utils/router';
  */
 declare const self: ServiceWorkerGlobalScope;
 declare global {
-    interface NextBuildManifest {
-        [key: string]: Array<string>
-    }
+  interface NextBuildManifest {
+    [key: string]: Array<string>;
+  }
 
-    interface ServiceWorkerGlobalScope {
-        __BUILD_MANIFEST: NextBuildManifest,
-        __BUILD_ID: string
-    }
+  interface ServiceWorkerGlobalScope {
+    __BUILD_MANIFEST: NextBuildManifest;
+    __BUILD_ID: string;
+  }
 }
 
 /*
@@ -61,7 +65,7 @@ const revision = `${Date.now()}`;
 /*
  * Routes that we need to cache.
  */
-const documentURLsToCache = buildManifestPages.map(url => ({
+const documentURLsToCache = buildManifestPages.map((url) => ({
   url,
   revision
 }));
@@ -71,16 +75,12 @@ const documentURLsToCache = buildManifestPages.map(url => ({
  *
  * No need to add revision as their URLs include version.
  */
-const documentFilesToCache = buildManifestPages.reduce<string[]>(
-  (pages, name) => [
-    ...pages,
-    ...manifest[name]
-  ],
-  []
-).map(url => ({
-  url,
-  revision: null
-}));
+const documentFilesToCache = buildManifestPages
+  .reduce<string[]>((pages, name) => [...pages, ...manifest[name]], [])
+  .map((url) => ({
+    url,
+    revision: null
+  }));
 
 /*
  * Precache static build files.
@@ -89,7 +89,7 @@ const documentFilesToCache = buildManifestPages.reduce<string[]>(
  * workbox-webpack-plugin.
  */
 precacheAndRoute([
-  ...self.__WB_MANIFEST || [],
+  ...(self.__WB_MANIFEST || []),
   ...documentURLsToCache,
   ...documentFilesToCache
 ]);
@@ -98,9 +98,7 @@ precacheAndRoute([
  * On re-deploy delete all cached runtime requests.
  */
 self.addEventListener('activate', (event: ExtendableEvent) => {
-  event.waitUntil(
-    deleteEntriesForCache(CACHE_NAME_RUNTIME)
-  );
+  event.waitUntil(deleteEntriesForCache(CACHE_NAME_RUNTIME));
 });
 
 self.addEventListener('install', () => {

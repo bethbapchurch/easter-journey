@@ -1,13 +1,13 @@
-import React from "react";
-import Image from "components/image";
-import styles from "./Landing.module.scss";
+import React from 'react';
+import Image from 'components/image';
+import styles from './Landing.module.scss';
 
 const {
   wrapper,
   landing,
   landingText,
   landingImage,
-  landingNavigationWrapper,
+  landingNavigationWrapper
 } = styles;
 
 export default function Landing(): JSX.Element {

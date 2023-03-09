@@ -6,8 +6,9 @@ const getBuildManifest = (): NextBuildManifest => {
   return Object.entries(manifest).reduce<NextBuildManifest>(
     (manifest, [page, assets]) => ({
       ...manifest,
-      [page]: assets.map(url => `/_next/${url}`)
-    }), {}
+      [page]: assets.map((url) => `/_next/${url}`)
+    }),
+    {}
   );
 };
 

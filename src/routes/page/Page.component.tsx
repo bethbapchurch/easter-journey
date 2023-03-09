@@ -8,15 +8,10 @@ import { usePageData, usePageDetails } from 'hooks/page';
 import { injectClassNames } from 'utils/css';
 import styles from './Page.module.scss';
 
-const {
-  page,
-  pageLanding,
-  pageContent,
-  placeholder
-} = styles;
+const { page, pageLanding, pageContent, placeholder } = styles;
 
 type PageProps = {
-    isLanding?: boolean
+  isLanding?: boolean;
 };
 
 export const addTitleTags = (title: string): JSX.Element => {
@@ -26,8 +21,8 @@ export const addTitleTags = (title: string): JSX.Element => {
 
   return (
     <>
-      <title>{ title }</title>
-      <meta name="og:title" content={ title } />
+      <title>{title}</title>
+      <meta name="og:title" content={title} />
     </>
   );
 };
@@ -38,11 +33,7 @@ export const addDescriptionTag = (description: string): JSX.Element => {
   }
 
   return (
-    <meta
-      name="description"
-      property="og:description"
-      content={ description }
-    />
+    <meta name="description" property="og:description" content={description} />
   );
 };
 
@@ -56,26 +47,25 @@ export default function Page(props: PageProps): JSX.Element {
   return (
     <>
       <Head>
-        { addTitleTags(title) }
-        { addDescriptionTag(description) }
+        {addTitleTags(title)}
+        {addDescriptionTag(description)}
         <meta name="robots" content="INDEX,FOLLOW" />
       </Head>
-      <main className={ classNames }>
-        { isLanding && <Landing /> }
+      <main className={classNames}>
+        {isLanding && <Landing />}
         <section>
-          <div className={ pageContent }>
+          <div className={pageContent}>
             <A2HS />
-            <div className={ pageContent }>
-              { content
-                ? <Html content={ content } />
-                : (
-                  <>
-                    <figure className={ placeholder } />
-                    <figure className={ placeholder } />
-                    <figure className={ placeholder } />
-                  </>
-                )
-              }
+            <div className={pageContent}>
+              {content ? (
+                <Html content={content} />
+              ) : (
+                <>
+                  <figure className={placeholder} />
+                  <figure className={placeholder} />
+                  <figure className={placeholder} />
+                </>
+              )}
             </div>
           </div>
           <Sidebar />

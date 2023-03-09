@@ -3,7 +3,7 @@ import { showNotification } from 'stores/notifications';
 
 const handleFetchError = (err: Error): Promise<any> => {
   // eslint-disable-next-line
-    console.error(err);
+  console.error(err);
 
   store.dispatch(
     showNotification({

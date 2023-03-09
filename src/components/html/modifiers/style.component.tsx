@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Element } from 'domhandler/lib/node';
 import Head from 'next/head';
 
@@ -7,9 +7,7 @@ export default function Style(domNode: Element): JSX.Element | null {
 
   return (
     <Head>
-      <style>
-        { children }
-      </style>
+      <style>{children as ReactNode}</style>
     </Head>
   );
 }

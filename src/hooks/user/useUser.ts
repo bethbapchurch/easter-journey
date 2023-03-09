@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { User, getUser } from 'stores/user';
 import { useSelector, useDispatch } from 'react-redux';
+import { User, getUser } from 'stores/user';
 import { RootState } from 'stores';
 
 const useUser = (): User => {
@@ -11,7 +11,7 @@ const useUser = (): User => {
     if (!user.name) {
       dispatch(getUser('tomburgs'));
     }
-  }, []);
+  }, [dispatch, user.name]);
 
   return user;
 };

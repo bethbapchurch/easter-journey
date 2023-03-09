@@ -1,6 +1,6 @@
+import { useSelector } from 'react-redux';
 import { RootState } from 'stores';
 import { PageDetails } from 'stores/pages';
-import { useSelector } from 'react-redux';
 import { usePageId } from 'hooks/page';
 
 const usePageDetails = (): PageDetails => {

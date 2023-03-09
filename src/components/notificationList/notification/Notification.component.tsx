@@ -6,24 +6,23 @@ import {
   hideNotification
 } from 'stores/notifications';
 import { injectClassNames } from 'utils/css';
-import { ANIMATION_DURATION, NOTIFICATION_TTL } from 'components/notificationList';
+import {
+  ANIMATION_DURATION,
+  NOTIFICATION_TTL
+} from 'components/notificationList';
 import styles from './Notification.module.scss';
 
 type NotificationProps = {
-    notificationId: NotificationId,
-    notification: INotification
+  notificationId: NotificationId;
+  notification: INotification;
 };
 
-const {
-  notification,
-  notificationOpen,
-  notificationClose
-} = styles;
+const { notification, notificationOpen, notificationClose } = styles;
 
 const useHideNotification = (
   notificationId: NotificationId,
   setIsClosing: (isClosing: boolean) => void
-): () => void => {
+): (() => void) => {
   const dispatch = useDispatch();
 
   return () => {
@@ -38,10 +37,7 @@ const useHideNotification = (
 const useIsClosing = (
   notificationId: NotificationId,
   isExpirable: boolean
-): [
-    boolean,
-    () => void
-] => {
+): [boolean, () => void] => {
   const [isClosing, setIsClosing] = useState(false);
   const hideNotification = useCallback(
     useHideNotification(notificationId, setIsClosing),
@@ -49,19 +45,15 @@ const useIsClosing = (
   );
 
   useEffect(() => {
-    const timeout = (
-      isExpirable && setTimeout(
-        hideNotification,
-        NOTIFICATION_TTL
-      )
-    );
+    const timeout =
+      isExpirable && setTimeout(hideNotification, NOTIFICATION_TTL);
 
     return () => {
       if (timeout) {
         clearTimeout(timeout);
       }
     };
-  }, []);
+  }, [hideNotification, isExpirable]);
 
   return [isClosing, hideNotification];
 };
@@ -70,29 +62,21 @@ export default function Notification({
   notificationId,
   notification: { message, isExpirable }
 }: NotificationProps): JSX.Element {
-  const [isClosing, hideNotification] = useIsClosing(notificationId, isExpirable);
+  const [isClosing, hideNotification] = useIsClosing(
+    notificationId,
+    isExpirable
+  );
 
-  const notificationState = isClosing
-    ? notificationClose
-    : notificationOpen;
+  const notificationState = isClosing ? notificationClose : notificationOpen;
 
   return (
-    <li
-      className={
-        injectClassNames(
-          notification,
-          notificationState
-        )
-      }
-    >
+    <li className={injectClassNames(notification, notificationState)}>
       <button
         type="button"
         aria-label="close notification"
-        onClick={ hideNotification }
+        onClick={hideNotification}
       />
-      <p>
-        { message }
-      </p>
+      <p>{message}</p>
     </li>
   );
 }

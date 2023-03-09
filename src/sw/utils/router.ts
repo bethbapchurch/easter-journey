@@ -1,117 +1,99 @@
-import {
-  Router as WorkboxRouter,
-  RegExpRoute
-} from 'workbox-routing';
-import {
-  RouteHandler,
-  RouteHandlerObject,
-  cacheNames
-} from 'workbox-core';
+import { Router as WorkboxRouter, RegExpRoute } from 'workbox-routing';
+import { RouteHandler, RouteHandlerObject, cacheNames } from 'workbox-core';
 import getRequestedPageFromURL from 'sw/utils/getRequestedPageFromURL';
 
 declare const self: ServiceWorkerGlobalScope;
 
 interface Config {
-    cacheName: string
+  cacheName: string;
 }
 
 interface StrategyClass {
-    new(...args: any): RouteHandlerObject
+  new (...args: any): RouteHandlerObject;
 }
 
 export default class Router {
-    private _cacheName: string;
-    private _ignoredRoutes: RegExp | undefined;
-    private _workboxRouter: WorkboxRouter;
+  private _cacheName: string;
+  private _ignoredRoutes: RegExp | undefined;
+  private _workboxRouter: WorkboxRouter;
 
-    constructor(cacheName: string) {
-      this._cacheName = cacheName;
-      this._workboxRouter = new WorkboxRouter();
-      this._init();
+  constructor(cacheName: string) {
+    this._cacheName = cacheName;
+    this._workboxRouter = new WorkboxRouter();
+    this._init();
+  }
+
+  private get config(): Config {
+    return {
+      cacheName: this._cacheName
+    };
+  }
+
+  private register(...args: [RegExp, RouteHandler]): void {
+    this._workboxRouter.registerRoute(new RegExpRoute(...args));
+  }
+
+  private _init(): void {
+    self.onfetch = this.handleFetch;
+  }
+
+  set ignoredRoutes(ignoredRoutes: RegExp) {
+    this._ignoredRoutes = ignoredRoutes;
+  }
+
+  handleOfflineDocumentFetch = async (event: FetchEvent): Promise<Response> => {
+    const {
+      request: { url }
+    } = event;
+
+    /*
+     * Make sure that build manifest includes
+     * the pathname we're requesting.
+     */
+    const requestedPage = getRequestedPageFromURL(url);
+
+    if (!requestedPage) {
+      throw new Error('Requested page does not exist');
     }
 
-    private get config(): Config {
-      return {
-        cacheName: this._cacheName
-      };
+    const cache = await self.caches.open(cacheNames.precache);
+    const document = await cache.match(requestedPage, { ignoreSearch: true });
+
+    if (!document) {
+      throw new Error('Missing document cache');
     }
 
-    private register(...args: [RegExp, RouteHandler]): void {
-      this._workboxRouter.registerRoute(
-        new RegExpRoute(...args)
-      );
+    return document;
+  };
+
+  handleFetch = async (event: FetchEvent): Promise<void> => {
+    const { request } = event;
+    const { url, destination } = request;
+
+    if (this._ignoredRoutes && this._ignoredRoutes.test(url)) {
+      return;
     }
 
-    private _init(): void {
-      self.onfetch = this.handleFetch;
+    if (!navigator.onLine && destination === 'document') {
+      event.respondWith(this.handleOfflineDocumentFetch(event));
+
+      return;
     }
 
-    set ignoredRoutes(ignoredRoutes: RegExp) {
-      this._ignoredRoutes = ignoredRoutes;
+    const response = this._workboxRouter.handleRequest({ request, event });
+
+    if (!response) {
+      return;
     }
 
-    handleOfflineDocumentFetch = async (event: FetchEvent): Promise<Response> => {
-      const { request: { url } } = event;
+    event.respondWith(response);
+  };
 
-      /*
-         * Make sure that build manifest includes
-         * the pathname we're requesting.
-         */
-      const requestedPage = getRequestedPageFromURL(url);
+  setRoute(route: RegExp, Strategy: StrategyClass): void {
+    this.register(route, new Strategy(this.config));
+  }
 
-      if (!requestedPage) {
-        throw new Error('Requested page does not exist');
-      }
-
-      const cache = await self.caches.open(cacheNames.precache);
-      const document = await cache.match(requestedPage, { ignoreSearch: true });
-
-      if (!document) {
-        throw new Error('Missing document cache');
-      }
-
-      return document;
-    }
-
-    handleFetch = async (event: FetchEvent): Promise<void> => {
-      const { request } = event;
-      const { url, destination } = request;
-
-      if (this._ignoredRoutes && this._ignoredRoutes.test(url)) {
-        return;
-      }
-
-      if (!navigator.onLine && destination === 'document') {
-        event.respondWith(
-          this.handleOfflineDocumentFetch(event)
-        );
-
-        return;
-      }
-
-      const response = this._workboxRouter.handleRequest({ request, event });
-
-      if (!response) {
-        return;
-      }
-
-      event.respondWith(response);
-    }
-
-    setRoute(
-      route: RegExp,
-      Strategy: StrategyClass
-    ): void {
-      this.register(
-        route,
-        new Strategy(this.config)
-      );
-    }
-
-    setDefault(Strategy: StrategyClass): void {
-      this._workboxRouter
-        .setDefaultHandler(
-          new Strategy(this.config)
-        );
-    }
+  setDefault(Strategy: StrategyClass): void {
+    this._workboxRouter.setDefaultHandler(new Strategy(this.config));
+  }
 }
