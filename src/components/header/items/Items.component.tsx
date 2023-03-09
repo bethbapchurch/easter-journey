@@ -8,8 +8,8 @@ const { items, active } = styles;
 
 const links = [
   { name: 'Home', url: '/', alias: [] },
-  { name: 'Pages', url: '/pages', alias: ['/[page]'] },
-  { name: 'Profile', url: '/profile', alias: [] }
+  { name: 'Guide', url: '/pages', alias: ['/[page]'] },
+  { name: 'About', url: '/about', alias: [] }
 ];
 
 export default function Items(): JSX.Element {

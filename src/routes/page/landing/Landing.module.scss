@@ -3,14 +3,18 @@
 @use 'styles/variables/theme';
 
 .wrapper {
+  background-size: cover;
+  background-repeat: no-repeat;
   background-color: #fcebda;
+  background-image: url(../../../assets/EJ-BG.jpg);
+  background-attachment: scroll;
+  background-position: 50% 0px;
+
   padding: var(--header-height) 0 0;
 
   @include theme.dark-mode {
     --primary-text-color: #f2f2f7;
     --secondary-text-color: #f3f3f7;
-
-    background-color: #2e3191;
   }
 }
 
@@ -32,9 +36,24 @@
     max-width: 650px;
     text-align: center;
 
-    h1,
+    h1, h2, p {
+      color: #000;
+      font-weight: 600;
+    }
+
     p {
-      color: var(--primary-text-color);
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  &Subtext {
+    margin: 0 auto;
+    padding: 0 var(--content-padding) 1px var(--content-padding);
+    text-align: center;
+
+    h1, p {
+      color: #000;
       font-weight: 600;
     }
 

@@ -2,7 +2,7 @@
     <img
       width="512px"
       alt="Easter Journey"
-      src="docs/pwa-boilerplate.png"
+      src="public/assets/EJ_bLogo_512x360.png"
     />
 </div>
 <p align="center">
@@ -13,26 +13,15 @@
 
 ## What is Easter Journey?
 
-Easter Journey is React & NextJS based boilerplate written in TypeScript.
-It's designed to help you kick-start your next project by supplying you with features & components to cut development time.
+Easter Journey is a reflective walk-through of the Easter story.
 
-## What features does Easter Journey bring?
+## What features does Easter Journey app bring?
 
-The following are features that come with Easter Journey:
+The following are features that come with Easter Journey app:
 - Offline Mode with effective cache policies.
 - Dark Theme support.
 - Service Worker with effective precache policies that is easily configurable.
 - Well Tailored, ensured to run & look well on Desktop, Android & iOS.
-- More to come!
-
-## Demo
-
-Check out our demo @ [pwa-boilerplate.com](https://pwa-boilerplate.com)!
-
-## Get started
-
-You can get started by cloning this repo.
-Our docs & guidelines can be found [here](docs/)
 
 ## Thanks to
 
