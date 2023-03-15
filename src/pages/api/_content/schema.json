@@ -1,6 +1,10 @@
 {
   "home": {
     "title": "Easter Journey",
+    "description": "A reflective walk-through of the Easter story."
+  },
+  "about": {
+    "title": "About",
     "description": "Progressive Web App boilerplate written in TypeScript, React, and Next. Designed to help you start your next PWA project faster."
   },
   "why-pwa": {

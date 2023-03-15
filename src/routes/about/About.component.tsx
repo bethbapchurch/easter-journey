@@ -1,11 +1,23 @@
 import React from 'react';
 import Head from 'next/head';
+import Html from 'components/html';
 import Image from 'components/image';
+import { usePageData } from 'hooks/page';
 import styles from './About.module.scss';
 
-const { about, aboutMain, aboutPicture, aboutContent, appAbout } = styles;
+const {
+  about,
+  aboutMain,
+  aboutPicture,
+  aboutContent,
+  appAbout,
+  appAboutContent,
+  placeholder
+} = styles;
 
 export default function About(): JSX.Element {
+  const { content = '' } = usePageData();
+
   return (
     <>
       <Head>
@@ -30,16 +42,16 @@ export default function About(): JSX.Element {
         </div>
         <div className={appAbout}>
           <h2>About This App</h2>
-          <p>
-            Aliquam aliquet tempus metus et varius. Etiam convallis nunc at
-            magna venenatis, vitae egestas nibh accumsan. Nam auctor neque eget
-            odio pretium, non lobortis sem condimentum. Vestibulum tempus risus
-            vel est tristique, sed malesuada leo facilisis. Etiam sagittis leo
-            eget augue ullamcorper sagittis. Fusce efficitur convallis turpis,
-            sed faucibus diam lobortis ac. Morbi tincidunt purus tincidunt,
-            maximus est vitae, semper erat. Pellentesque dictum in nunc eu
-            porttitor. Integer vitae justo sit amet metus malesuada eleifend.
-          </p>
+          <div className={appAboutContent}>
+            {content ? (
+              <Html content={content} />
+            ) : (
+              <>
+                <figure className={placeholder} />
+                <figure className={placeholder} />
+              </>
+            )}
+          </div>
         </div>
       </main>
     </>

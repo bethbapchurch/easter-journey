@@ -6,7 +6,6 @@ const {
   wrapper,
   landing,
   landingText,
-  landingSubtext,
   landingImage,
   landingNavigationWrapper
 } = styles;
@@ -48,22 +47,6 @@ export default function Landing(): JSX.Element {
           width="512px"
           height="360px"
         />
-      </div>
-      <div className={landingSubtext}>
-        <p>
-          This exhibition is not to be missed, allowing visitors to engage with
-          the Easter story in a new and meaningful way. Visitors can take a
-          journey back in time and gain a deeper understanding of Christ&apos;s
-          life, teachings, and the significance of his death and resurrection.
-          Mark your calendars and join us at Bethlehem Baptist Church for this
-          special event.
-        </p>
-        <p>
-          <small>
-            *Parental guidance is recommended for under-12s, and there is one
-            area specifically PG15.
-          </small>
-        </p>
       </div>
     </div>
   );

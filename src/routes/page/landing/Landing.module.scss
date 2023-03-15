@@ -47,22 +47,6 @@
     }
   }
 
-  &Subtext {
-    margin: 0 auto;
-    padding: 0 var(--content-padding) 1px var(--content-padding);
-    text-align: center;
-
-    h1, p {
-      color: #000;
-      font-weight: 600;
-    }
-
-    p {
-      font-size: 20px;
-      font-weight: 500;
-    }
-  }
-
   &NavigationWrapper {
     display: block;
     margin: 0 auto;

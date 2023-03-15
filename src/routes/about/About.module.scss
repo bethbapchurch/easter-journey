@@ -1,5 +1,5 @@
 @use 'styles/variables/media';
-@use 'styles/variables/placeholder' as *;
+@use 'styles/variables/placeholder' as animations;
 
 .about {
   --about-picture-size: 200px;
@@ -52,5 +52,36 @@
 
   p {
     max-width: 800px;
+  }
+
+  &Content {
+    line-height: 1.4;
+
+    > h1,
+    h2 {
+      font-size: 36px;
+      font-weight: 500;
+    }
+
+    > p {
+      font-size: 18px;
+      margin: 0;
+      white-space: pre-line;
+    }
+  }
+}
+
+
+.placeholder {
+  margin: 0 0 15px;
+  padding-bottom: 20%;
+  @include animations.placeholder;
+
+  &:nth-child(n + 2) {
+    padding-bottom: 40%;
+  }
+
+  &:nth-child(n + 3) {
+    padding-bottom: 30%;
   }
 }
