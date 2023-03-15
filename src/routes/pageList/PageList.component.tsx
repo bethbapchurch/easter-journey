@@ -10,17 +10,20 @@ export default function PageList(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Page List</title>
+        <title>EJ Guide</title>
       </Head>
       <main className={pageList}>
-        <h1>Pages</h1>
+        <h1>Easter Journey Guide</h1>
         <p>
-          Do you also think this lack of content looks sad?
+          Work through the stations in the order shown.
           <br />
-          Feel free to contribute by going to our GitHub repo and creating a
-          pull-request,
+          Read the description at each station. Take your time.
           <br />
-          we would greatly appreciate it!
+          <br />
+          <small>
+            *Parental guidance is recommended for under-12s, and there is one
+            area specifically PG15.
+          </small>
         </p>
         <Pages className={pageListContainer}>
           <li>

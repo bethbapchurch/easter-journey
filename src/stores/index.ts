@@ -7,12 +7,10 @@ import {
 } from 'redux';
 import thunk, { ThunkAction } from 'redux-thunk';
 import { getWindowProperty } from 'utils/browser';
-import { user } from 'stores/user';
 import { notifications } from 'stores/notifications';
 import { pages } from 'stores/pages';
 
 const reducers = combineReducers({
-  user,
   notifications,
   pages
 });

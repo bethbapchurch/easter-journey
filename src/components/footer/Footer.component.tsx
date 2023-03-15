@@ -7,14 +7,10 @@ export default function Footer(): JSX.Element {
   return (
     <footer className={footer}>
       <p>© Easter Journey</p>
+      <p>by</p>
       <p>
-        View source code on{' '}
-        <a
-          href="https://github.com/bethbapchurch/easter-journey"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
+        <a href="https://bethlehem.org.nz/" target="_blank" rel="noreferrer">
+          Bethlehem Baptist Church
         </a>
       </p>
     </footer>
