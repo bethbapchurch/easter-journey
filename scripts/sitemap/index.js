@@ -1,6 +1,7 @@
 const path = require('path');
 const { promises: fs } = require('fs');
 const { default: getRouteFromAssetPath } = require('next/dist/next-server/lib/router/utils/get-route-from-asset-path');
+const matter = require('gray-matter');
 const generateSitemap = require('./generateSitemap');
 const root = process.cwd();
 
@@ -67,11 +68,50 @@ const addStaticPages = async ({ baseUrl, skipIndex }) => {
     return direntsToRoutes(dirents, directory);
 };
 
+const guidesDirectory = path.join(process.cwd(), 'src', 'guides');
+
+async function getSortedGuidesData() {
+    // Get file names under /guides
+    const fileNames = await fs.readdir(guidesDirectory);
+    const allGuidesData = fileNames.map(async (fileName) => {
+        // Remove ".md" from file name to get id
+        const id = fileName.replace(/\.md$/, '');
+
+        // Read markdown file as string
+        const fullPath = path.join(guidesDirectory, fileName);
+        const fileContents = await fs.readFile(fullPath, 'utf8');
+
+        // Use gray-matter to parse the post metadata section
+        const matterResult = matter(fileContents);
+
+        // Combine the data with the id
+        return {
+            id,
+            ...(matterResult.data)
+        };
+    });
+    return allGuidesData;
+}
+
+async function getGuidesSchema() {
+    const guidesData = await getSortedGuidesData();
+    const guidesSchema = guidesData.reduce(
+        (gs, g) => ({
+            ...gs,
+            [g.id]: { title: g.title }
+        }),
+        {}
+    );
+    return guidesSchema;
+}
+
 /*
  * Get our api pages
  */
 const addDynamicPages = async ({ baseUrl }) => {
-    const schema = await require(path.resolve(root, 'src/pages/api/_content/schema.json'));
+    const _schema = await require(path.resolve(root, 'src/pages/api/_content/schema.json'));
+    const guidesSchema = getGuidesSchema();
+    const schema = { ..._schema, ...guidesSchema };
 
     return Object.keys(schema).map(page => ({ loc: `${baseUrl}/${page}` }));
 };
