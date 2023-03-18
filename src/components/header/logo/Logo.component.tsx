@@ -7,7 +7,7 @@ const { logo } = styles;
 export default function Logo(): JSX.Element {
   return (
     <div className={logo}>
-      <Link href="/">PWA</Link>
+      <Link href="/">EJ</Link>
     </div>
   );
 }

@@ -55,7 +55,7 @@ export const PageItemList = (props: PageItemList): JSX.Element => {
 
 export default memo(function Pages(props: PageProps): JSX.Element {
   const { className, children } = props;
-  const { home, ...schema } = useSchema();
+  const { home, about, ...schema } = useSchema();
   const isSchemaLoaded = !!Object.keys(schema).length;
 
   return (
