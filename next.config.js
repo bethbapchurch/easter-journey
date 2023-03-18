@@ -13,7 +13,46 @@ const serviceWorkerPath = 'static/sw.js';
 const serviceWorkerUrl = `/_next/${serviceWorkerPath}`;
 const serviceWorkerDest = `.next/${serviceWorkerPath}`;
 
-module.exports = {
+/** @see https://stackoverflow.com/questions/65974337/import-es-module-in-next-js-err-require-esm */
+const withTM = require('next-transpile-modules')([
+  // remark package and dependencies
+  'remark',
+  'bail',
+  'ccount',
+  'character-entities',
+  'comma-separated-tokens',
+  'decode-named-character-reference',
+  'hast-util-sanitize',
+  'hast-util-to-html',
+  'hast-util-whitespace',
+  'html-void-elements',
+  'longest-streak',
+  'mdast-util-definitions',
+  'mdast-util-phrasing',
+  'mdast-util-to-hast',
+  'mdast-util-to-markdown',
+  'mdast-util-to-string',
+  'micromark-util-combine-extensions',
+  'micromark-util-encode',
+  'micromark-util-html-tag-name',
+  'micromark-util-resolve-all',
+  'micromark-util-symbol',
+  'property-information',
+  'space-separated-tokens',
+  'stringify-entities',
+  'trim-lines',
+  'trough',
+  'unified',
+  'unist-util-is',
+  'unist-util-generated',
+  'unist-util-position',
+  'unist-util-stringify-position',
+  'unist-util-visit',
+  'vfile',
+  'zwitch'
+]);
+
+module.exports = withTM({
   webpack5: true,
   reactStrictMode: true,
   env: {
@@ -136,4 +175,4 @@ module.exports = {
       ]
     }
   ]
-};
+});
