@@ -3,8 +3,18 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import getConfig from 'next/config';
 
-const guidesDirectory = path.join(process.cwd(), 'src', 'guides');
+const root = process.cwd();
+const guidesDirectoryDev = path.resolve(root, 'public', 'guides');
+
+const { serverRuntimeConfig } = getConfig();
+const guidesDirectoryDeploy = path.join(root, 'guides');
+
+const doesDevGuidesPathExist = fs.existsSync(guidesDirectoryDev);
+
+// On Vercel deploy the `public` folder contents is at the root
+const guidesDirectory = doesDevGuidesPathExist ? guidesDirectoryDev : guidesDirectoryDeploy ;
 
 export function getSortedGuidesData(): {
   date: string;

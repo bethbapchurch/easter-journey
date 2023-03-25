@@ -60,6 +60,9 @@ module.exports = withTM({
   env: {
     serviceWorkerUrl
   },
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname
+  },
   pageExtensions: ['ts', 'tsx'],
   excludeFile: (str) => /\/src\/sw\/.*/.test(str),
   webpack: (config, { isServer, dev, webpack, buildId }) => {
