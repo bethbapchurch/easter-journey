@@ -1,10 +1,11 @@
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const generateSitemap = require('./scripts/sitemap');
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-const baseUrl = 'https://pwa-boilerplate.com';
+const baseUrl = 'https://easter-journey-2023.vercel.app/';
 
 const sitemapDest = path.resolve('.next/static');
 const skipIndex = ['/profile'];
@@ -73,6 +74,12 @@ module.exports = withTM({
         loader: 'raw-loader'
       }
     );
+
+    if (!dev) {
+      config.plugins.push(
+        new CopyPlugin({ patterns: [{ from: 'src/guides', to: 'src/guides' }] })
+      )
+    }
 
     if (isServer && !dev) {
       generateSitemap(

@@ -4,7 +4,11 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-const guidesDirectory = path.join(process.cwd(), 'src', 'guides');
+let root = process.cwd();
+if (process.env.NODE_ENV === 'production') {
+  root = path.join(process.cwd(), '.next/server/chunks');
+}
+const guidesDirectory = path.resolve(root, 'src', 'guides');
 
 export function getSortedGuidesData(): {
   date: string;

@@ -68,7 +68,7 @@ const addStaticPages = async ({ baseUrl, skipIndex }) => {
     return direntsToRoutes(dirents, directory);
 };
 
-const guidesDirectory = path.join(process.cwd(), 'src', 'guides');
+const guidesDirectory = path.resolve(root, 'src', 'guides');
 
 async function getSortedGuidesData() {
     // Get file names under /guides
