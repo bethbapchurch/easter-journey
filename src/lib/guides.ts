@@ -34,16 +34,12 @@ export function getSortedGuidesData(): {
       ...(matterResult.data as { date: string; title: string })
     };
   });
-  return allGuidesData;
-  /*
-  // Sort guides by date
+  // Sort guides by leading number in id
   return allGuidesData.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });*/
+    const _a = +a.id.split('-')[0];
+    const _b = +b.id.split('-')[0];
+    return _a - _b;
+  });
 }
 
 export function getAllGuideIds(): {
