@@ -1,5 +1,5 @@
 import React from 'react';
-import Pages from 'components//pages';
+import Pages from 'components/pages';
 import Placeholder from 'components/placeholder';
 import styles from './Sidebar.module.scss';
 
