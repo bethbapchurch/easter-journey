@@ -62,14 +62,12 @@ export default function Page(props: PageProps): JSX.Element {
       const routeIndex = routes.indexOf(route);
       switch (eventData.dir) {
         case 'Left':
-        case 'Up':
           // already at the last page?
           if (routeIndex >= routes.length - 1) return;
           // move forward a page
           router.push(`/${routes[routeIndex + 1]}`);
           break;
         case 'Right':
-        case 'Down':
           // already at the first page?
           if (routeIndex <= 0) return;
           // move back a page
