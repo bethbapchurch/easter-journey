@@ -55,7 +55,14 @@ export default function Page(props: PageProps): JSX.Element {
   const config = {};
   const handlers = useSwipeable({
     onSwiped: (eventData) => {
-      if (router.asPath === '/') return;
+      if (routes.length <= 0) return;
+      if (router.asPath === '/') {
+        if (eventData.dir === 'Left') {
+          // move to first page
+          router.push(`/${routes[0]}`);
+        }
+        return;
+      }
       if (typeof route !== 'string') return;
       if (!routes.includes(route)) return;
 
