@@ -56,13 +56,11 @@ const withTM = require('next-transpile-modules')([
 ]);
 
 module.exports = withTM({
-  webpack5: true,
   reactStrictMode: true,
   env: {
     serviceWorkerUrl
   },
   pageExtensions: ['ts', 'tsx'],
-  excludeFile: (str) => /\/src\/sw\/.*/.test(str),
   webpack: (config, { isServer, dev, webpack, buildId }) => {
     config.module.rules.push(
       {
