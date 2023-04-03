@@ -6,7 +6,7 @@ import html from 'remark-html';
 
 let root = process.cwd();
 if (process.env.NODE_ENV === 'production') {
-  root = path.join(process.cwd(), '.next/server/chunks');
+  root = path.join(process.cwd(), '.next', 'server');
 }
 const guidesDirectory = path.resolve(root, 'src', 'guides');
 

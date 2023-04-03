@@ -3,8 +3,10 @@ import {
   compose,
   combineReducers,
   applyMiddleware,
+  // eslint-disable-next-line import/named
   Action
 } from 'redux';
+// eslint-disable-next-line import/named
 import thunk, { ThunkAction } from 'redux-thunk';
 import { getWindowProperty } from 'utils/browser';
 import { notifications } from 'stores/notifications';
