@@ -1,6 +1,6 @@
 const path = require('path');
 const { promises: fs } = require('fs');
-const { default: getRouteFromAssetPath } = require('next/dist/next-server/lib/router/utils/get-route-from-asset-path');
+const { default: getRouteFromAssetPath } = require('next/dist/shared/lib/router/utils/get-route-from-asset-path');
 const matter = require('gray-matter');
 const generateSitemap = require('./generateSitemap');
 const root = process.cwd();
