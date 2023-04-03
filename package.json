@@ -14,7 +14,7 @@
     "@svgr/webpack": "6.2.1",
     "gray-matter": "^4.0.3",
     "html-react-parser": "^3.0.1",
-    "jstoxml": "^2.2.7",
+    "jstoxml": "^3.2.6",
     "next": "^12.1.0",
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
