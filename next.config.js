@@ -78,7 +78,7 @@ module.exports = withTM({
     if (!dev) {
       config.plugins.push(
         new CopyPlugin({ patterns: [{ from: 'src/guides', to: 'src/guides' }] })
-      )
+      );
     }
 
     if (isServer && !dev) {
@@ -150,6 +150,8 @@ module.exports = withTM({
             /\/react-refresh\.js$/i,
             /\/_error\.js$/i,
             /\.js\.map$/i,
+            // Don't cache the `guides/*.md` sources since their HTML is cached.
+            /\/guides\/.*\.md$/i,
             /*
              * Since we're using variable fonts
              * we don't want to pre-cache any,

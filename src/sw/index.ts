@@ -98,7 +98,7 @@ precacheAndRoute([
  * On re-deploy delete all cached runtime requests.
  */
 self.addEventListener('activate', (event: ExtendableEvent) => {
-  event.waitUntil(deleteEntriesForCache(CACHE_NAME_RUNTIME));
+  event.waitUntil(deleteEntriesForCache(CACHE_NAME_RUNTIME)());
 });
 
 self.addEventListener('install', () => {
