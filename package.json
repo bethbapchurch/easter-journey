@@ -11,7 +11,7 @@
     "stylelint": "stylelint ./src"
   },
   "dependencies": {
-    "@svgr/webpack": "6.2.1",
+    "@svgr/webpack": "7.0.0",
     "gray-matter": "^4.0.3",
     "html-react-parser": "^3.0.1",
     "jstoxml": "^2.2.7",
@@ -53,8 +53,8 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.4.0",
     "next-transpile-modules": "^10.0.0",
-    "stylelint": "^14.8.2",
-    "stylelint-config-sass-guidelines": "^9.0.0"
+    "stylelint": "^15.6.0",
+    "stylelint-config-sass-guidelines": "^10.0.0"
   },
   "browserslist": {
     "production": [
